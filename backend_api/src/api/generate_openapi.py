@@ -3,6 +3,12 @@ import os
 
 from src.api.main import app
 
+"""
+Generate OpenAPI schema with full app metadata and tags.
+
+This script writes the schema to backend_api/interfaces/openapi.json
+"""
+
 # Get the OpenAPI schema
 openapi_schema = app.openapi()
 
