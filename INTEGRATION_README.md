@@ -21,7 +21,7 @@ Environment setup
 2) Backend API
 - cd secure-credential-wallet-40962-40972/backend_api
 - Ensure a real .env exists (provided by this repo automation). If missing: cp .env.example .env
-- Ensure DB_URL=sqlite:///./app.db (matches database SQLITE_DB)
+- Ensure DB_URL=sqlite:///./app.db (matches database SQLITE_DB: ./app.db)
 - Ensure CORS_ORIGINS includes your frontend origin(s), e.g., https://appetize.io
 - Run migrations: alembic upgrade head
 - Start: python run.py (listens on 0.0.0.0:8000 locally; preview is on port 3001)
@@ -32,6 +32,12 @@ Environment setup
 - cp .env.example .env
 - Set BACKEND_BASE_URL to: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
 - Start your Flutter app per the project tooling.
+
+Validation checklist (dev)
+- backend_api/.env: DB_URL=sqlite:///./app.db, CORS_ORIGINS includes https://appetize.io
+- database_postgres/.env: SQLITE_DB=./app.db
+- frontend_web/.env: BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+- Access /docs at backend preview; register/login works; CRUD credentials works; sharing + webhook as per docs.
 
 Notes
 - Keep secrets out of VCS. Use .env locally.

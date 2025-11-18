@@ -21,6 +21,11 @@ Preview URLs
 - Docs: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001/docs
 - Frontend preview: https://appetize.io/embed/drulzdxyg5mu7fv3flhnvkdose
 
+Env alignment checklist (development)
+- database_postgres/.env -> SQLITE_DB=./app.db
+- backend_api/.env -> DB_URL=sqlite:///./app.db (matches SQLITE_DB), CORS_ORIGINS includes https://appetize.io
+- frontend_web/.env -> BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+
 End-to-end (dev) setup
 1) Database (SQLite for dev):
    - cd secure-credential-wallet-40962-40973/database_postgres
@@ -44,6 +49,14 @@ End-to-end (dev) setup
    - Set BACKEND_BASE_URL to the backend preview URL:
      BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
    - Start the Flutter/Web/Platform app per that project's instructions.
+
+Minimal flow validation (manual)
+- Register: POST /auth/register
+- Login: POST /auth/login -> obtain access token
+- Create credential: POST /credentials with Bearer token
+- List credentials: GET /credentials with Bearer token
+- Share: POST /sharing with Bearer token
+- Access shared: GET /sharing/access/{token}
 
 Notes:
 - Do not commit real secrets. These examples are for local dev only.
