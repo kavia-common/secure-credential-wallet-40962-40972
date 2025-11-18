@@ -22,9 +22,9 @@ Preview URLs
 - Frontend preview: https://appetize.io/embed/drulzdxyg5mu7fv3flhnvkdose
 
 Env alignment checklist (development)
-- database_postgres/.env -> SQLITE_DB=./app.db
-- backend_api/.env -> DB_URL=sqlite:///./app.db (matches SQLITE_DB), CORS_ORIGINS includes https://appetize.io
-- frontend_web/.env -> BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+- database_postgres/.env -> SQLITE_DB=./app.db  (use .env.example provided)
+- backend_api/.env -> DB_URL=sqlite:///./app.db (matches SQLITE_DB), CORS_ORIGINS includes https://appetize.io  (use .env.example provided)
+- frontend_web/.env -> BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001  (use .env.example provided)
 
 End-to-end (dev) setup
 1) Database (SQLite for dev):

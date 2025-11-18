@@ -20,7 +20,7 @@ Environment setup
 
 2) Backend API
 - cd secure-credential-wallet-40962-40972/backend_api
-- Ensure a real .env exists (provided by this repo automation). If missing: cp .env.example .env
+- If missing, create .env from example: cp .env.example .env
 - Ensure DB_URL=sqlite:///./app.db (matches database SQLITE_DB: ./app.db)
 - Ensure CORS_ORIGINS includes your frontend origin(s), e.g., https://appetize.io
 - Run migrations: alembic upgrade head
@@ -30,7 +30,7 @@ Environment setup
 3) Frontend
 - cd secure-credential-wallet-40962-40974/frontend_web
 - cp .env.example .env
-- Set BACKEND_BASE_URL to: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+- Ensure BACKEND_BASE_URL is set to: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
 - Start your Flutter app per the project tooling.
 
 Validation checklist (dev)
