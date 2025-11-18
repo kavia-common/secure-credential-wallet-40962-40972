@@ -39,6 +39,7 @@ def create_app() -> FastAPI:
     Returns:
         FastAPI: Configured FastAPI application instance.
     """
+    # CORS origins are read from env via settings.CORS_ORIGINS (CSV), defaulting to "*"
     middleware = [
         Middleware(
             CORSMiddleware,
