@@ -13,8 +13,13 @@ Backend API
   - python run.py
 
 OpenAPI
-- Generate: python -m src.api.generate_openapi
+- Generate: python -m src.api.generate_openAPI
 - File: backend_api/interfaces/openapi.json
+
+Preview URLs
+- Backend base URL: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+- Docs: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001/docs
+- Frontend preview: https://appetize.io/embed/drulzdxyg5mu7fv3flhnvkdose
 
 End-to-end (dev) setup
 1) Database (SQLite for dev):
@@ -24,19 +29,20 @@ End-to-end (dev) setup
 
 2) Backend API:
    - cd secure-credential-wallet-40962-40972/backend_api
-   - cp .env.example .env
+   - Ensure a real .env exists (if missing, copy from .env.example).
    - Ensure DB_URL matches the database SQLITE_DB path (default sqlite:///./app.db).
    - CORS:
-     - For local development, you can leave CORS_ORIGINS=*.
-     - To restrict, set CORS_ORIGINS to a CSV of exact origins (e.g., http://localhost:3000,http://127.0.0.1:3000).
+     - Include the frontend preview origin: CORS_ORIGINS=https://appetize.io
+     - To add more, provide CSV (e.g., https://appetize.io,http://localhost:3000).
    - Run DB migrations: alembic upgrade head
    - Start API: python run.py
-   - Docs: http://localhost:8000/docs
+   - Docs: http://localhost:8000/docs (local), preview docs as above.
 
 3) Frontend:
    - cd secure-credential-wallet-40962-40974/frontend_web
    - cp .env.example .env
-   - Set BACKEND_BASE_URL to your backend (e.g., http://localhost:8000).
+   - Set BACKEND_BASE_URL to the backend preview URL:
+     BACKEND_BASE_URL=https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
    - Start the Flutter/Web/Platform app per that project's instructions.
 
 Notes:

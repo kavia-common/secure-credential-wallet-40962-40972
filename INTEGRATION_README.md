@@ -5,6 +5,12 @@ This repo contains:
 - database_postgres (SQLite used for dev)
 - frontend_web (Flutter)
 
+Running containers (preview):
+- Backend API (docs): https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001/docs
+- Backend API base URL: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
+- Database (SQLite): https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3020
+- Frontend preview: https://appetize.io/embed/drulzdxyg5mu7fv3flhnvkdose
+
 Environment setup
 
 1) Database (development uses SQLite file)
@@ -14,17 +20,17 @@ Environment setup
 
 2) Backend API
 - cd secure-credential-wallet-40962-40972/backend_api
-- cp .env.example .env
+- Ensure a real .env exists (provided by this repo automation). If missing: cp .env.example .env
 - Ensure DB_URL=sqlite:///./app.db (matches database SQLITE_DB)
-- Optional: set CORS_ORIGINS to your frontend origin(s), e.g., http://localhost:3000
+- Ensure CORS_ORIGINS includes your frontend origin(s), e.g., https://appetize.io
 - Run migrations: alembic upgrade head
-- Start: python run.py (listens on 0.0.0.0:8000)
-- Docs: http://localhost:8000/docs
+- Start: python run.py (listens on 0.0.0.0:8000 locally; preview is on port 3001)
+- Docs: http(s)://<host>:<port>/docs
 
 3) Frontend
 - cd secure-credential-wallet-40962-40974/frontend_web
 - cp .env.example .env
-- Set BACKEND_BASE_URL to your backend URL (http://localhost:8000)
+- Set BACKEND_BASE_URL to: https://vscode-internal-23122-beta.beta01.cloud.kavia.ai:3001
 - Start your Flutter app per the project tooling.
 
 Notes
