@@ -18,7 +18,7 @@ def upgrade():
         sa.Column("hashed_password", sa.String(length=255), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False, server_default=sa.text("1")),
         sa.Column("is_admin", sa.Boolean(), nullable=False, server_default=sa.text("0")),
-        sa.Column("created_at", sa.DateTime(), nullable=False),
+        sa.Column("created_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
     )
 
     op.create_table(
@@ -33,8 +33,13 @@ def upgrade():
         ),
         sa.Column("title", sa.String(length=255), nullable=False),
         sa.Column("encrypted_blob", sa.Text(), nullable=False),
-        sa.Column("created_at", sa.DateTime(), nullable=False),
-        sa.Column("updated_at", sa.DateTime(), nullable=False),
+        sa.Column("created_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(),
+            nullable=False,
+            server_default=sa.text("CURRENT_TIMESTAMP"),
+        ),
     )
 
     op.create_table(
@@ -50,7 +55,7 @@ def upgrade():
         sa.Column("shared_with_email", sa.String(length=255), nullable=False, index=True),
         sa.Column("token", sa.String(length=255), nullable=False, unique=True),
         sa.Column("expires_at", sa.DateTime(), nullable=True),
-        sa.Column("created_at", sa.DateTime(), nullable=False),
+        sa.Column("created_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
         sa.UniqueConstraint("credential_id", "shared_with_email", name="uq_credential_email"),
     )
 
@@ -61,8 +66,8 @@ def upgrade():
         sa.Column("status", sa.String(length=50), nullable=False),
         sa.Column("provider_ref", sa.String(length=255), nullable=False, unique=True),
         sa.Column("result_payload", sa.Text(), nullable=True),
-        sa.Column("created_at", sa.DateTime(), nullable=False),
-        sa.Column("updated_at", sa.DateTime(), nullable=False),
+        sa.Column("created_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
+        sa.Column("updated_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
     )
 
 

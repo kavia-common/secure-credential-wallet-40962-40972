@@ -25,6 +25,7 @@ def _build_cors_origins(origins_str: str) -> List[str]:
     return items or ["*"]
 
 
+# PUBLIC_INTERFACE
 def create_app() -> FastAPI:
     """
     Create and configure the FastAPI application.
@@ -33,6 +34,10 @@ def create_app() -> FastAPI:
     - Configures CORS
     - Initializes DB engine and session factory
     - Includes routers with OpenAPI tags
+    - Exposes health (/) and readiness (/ready) endpoints
+
+    Returns:
+        FastAPI: Configured FastAPI application instance.
     """
     middleware = [
         Middleware(
@@ -72,9 +77,26 @@ def create_app() -> FastAPI:
     app.include_router(sharing.router, prefix="/sharing", tags=["sharing"])
     app.include_router(admin.router, prefix="/admin", tags=["admin"])
 
-    @app.get("/", tags=["health"], summary="Health Check", description="Returns API health status.")
+    @app.get(
+        "/",
+        tags=["health"],
+        summary="Health Check",
+        description="Returns API health status.",
+        responses={200: {"description": "Service is healthy"}},
+    )
     def health_check():
-        return {"message": "Healthy", "version": app.version}
+        return {"status": "ok", "version": app.version}
+
+    @app.get(
+        "/ready",
+        tags=["health"],
+        summary="Readiness Probe",
+        description="Readiness probe to signal dependencies are initialized.",
+        responses={200: {"description": "Service is ready"}},
+    )
+    def readiness_probe():
+        # In future we can attempt a lightweight DB check here
+        return {"ready": True}
 
     @app.on_event("shutdown")
     async def _on_shutdown() -> None:

@@ -44,9 +44,9 @@ class SharingService:
             raise ValueError("Invalid token")
         if share.expires_at is not None and share.expires_at < __import__("datetime").datetime.utcnow():
             raise ValueError("Token expired")
-        # Fallback to direct query to avoid different session state
+        # Fallback using Session.get for SQLAlchemy 2.0
         from src.models.models import Credential as CredModel
-        cred = self.db.query(CredModel).get(share.credential_id)
+        cred = self.db.get(CredModel, share.credential_id)
         if not cred:
             raise ValueError("Credential missing")
         return decrypt_text(cred.encrypted_blob)

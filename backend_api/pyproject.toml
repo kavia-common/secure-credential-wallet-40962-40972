@@ -1,2 +1,5 @@
 [tool.pytest.ini_options]
 pythonpath = ["."]
+addopts = -p no:warnings
+env = 
+    PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
